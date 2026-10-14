@@ -32,16 +32,16 @@ export default function Education() {
   }, [currentLineIndex]);
 
   return (
-    <section id="education" className="py-16 px-6 max-w-6xl mx-auto relative z-25">
+    <section id="education" className="py-6 md:py-8 px-6 max-w-6xl mx-auto relative z-25">
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-10 text-center"
+        className="mb-6 text-center"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-3 shadow-inner">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-2 shadow-inner">
           <GraduationCap size={15} className="text-white" /> Riwayat Akademik Profesional
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
@@ -64,7 +64,7 @@ export default function Education() {
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition duration-700" />
 
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4">
               <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shadow-lg backdrop-blur-md">
                 <GraduationCap size={22} />
               </div>

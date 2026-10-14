@@ -18,7 +18,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fungsi untuk scroll halus tanpa mengubah URL / tanpa tanda #
   const scrollToSection = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -37,7 +36,7 @@ export default function Navbar() {
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
     >
-      <div className="pointer-events-auto w-full max-w-xl backdrop-blur-2xl bg-white/10 border border-white/25 shadow-2xl rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden">
+      <div className="pointer-events-auto w-full max-w-xl backdrop-blur-2xl bg-white/15 border border-white/25 shadow-2xl rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden">
         
         <motion.div
           initial={{ x: -30, opacity: 0 }}

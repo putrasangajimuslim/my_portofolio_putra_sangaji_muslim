@@ -48,18 +48,9 @@ const projectsData = [
 ];
 
 const certificatesData = [
-  {
-    title: "Sertifikat 1",
-    image: "/documents/sertif1.jpg"
-  },
-  {
-    title: "Sertifikat 2",
-    image: "/documents/sertif2.jpg"
-  },
-  {
-    title: "Sertifikat 3",
-    image: "/documents/sertif3.png"
-  }
+  { title: "Sertifikat 1", image: "/documents/sertif1.jpg" },
+  { title: "Sertifikat 2", image: "/documents/sertif2.jpg" },
+  { title: "Sertifikat 3", image: "/documents/sertif3.png" }
 ];
 
 export default function Projects() {
@@ -78,27 +69,25 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 px-6 max-w-7xl mx-auto relative z-20">
+    <section id="projects" className="py-6 md:py-8 px-6 max-w-7xl mx-auto relative z-20">
       
-      {/* Bagian Header Showcase */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-10 text-center"
+        className="mb-6 text-center"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-3 shadow-inner">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-2 shadow-inner">
           <FolderGit2 size={15} className="text-white" /> Etalase Portofolio
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
+        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2">
           Portofolio & Sertifikasi
         </h2>
-        <p className="text-neutral-400 text-xs md:text-sm max-w-xl mx-auto font-light mb-8">
+        <p className="text-neutral-400 text-xs md:text-sm max-w-xl mx-auto font-light mb-6">
           Jelajahi perjalanan karir saya melalui proyek unggulan dan sertifikasi resmi.
         </p>
 
-        {/* Tab Minimalis */}
         <div className="inline-flex items-center p-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 backdrop-blur-md shadow-2xl">
           {[
             { name: "Projects", label: "Proyek", icon: FolderGit2 },
@@ -124,23 +113,18 @@ export default function Projects() {
         </div>
       </motion.div>
 
-      {/* Konten 3 Kartu Gaya Windows Alt+Tab Switcher */}
-      <div className="relative max-w-4xl mx-auto h-[480px] flex items-center justify-center">
+      <div className="relative max-w-4xl mx-auto h-[440px] flex items-center justify-center">
         
-        {/* Tombol Navigasi Kiri */}
         <button 
           onClick={handlePrev}
           className="absolute left-2 sm:-left-12 z-40 p-3 rounded-full bg-neutral-900 border border-neutral-800 text-white hover:bg-neutral-800 transition shadow-2xl cursor-pointer"
-          title="Sebelumnya"
         >
           <ChevronLeft size={20} />
         </button>
 
-        {/* Tombol Navigasi Kanan */}
         <button 
           onClick={handleNext}
           className="absolute right-2 sm:-right-12 z-40 p-3 rounded-full bg-neutral-900 border border-neutral-800 text-white hover:bg-neutral-800 transition shadow-2xl cursor-pointer"
-          title="Selanjutnya"
         >
           <ChevronRight size={20} />
         </button>
@@ -172,28 +156,13 @@ export default function Projects() {
                 }}
                 className={`absolute w-[320px] sm:w-[420px] rounded-3xl overflow-hidden border backdrop-blur-2xl transition-all ${cardStyle}`}
               >
-                {/* Gambar Preview Murni Tanpa Bingkai */}
-                <div className={`${activeTab === "Certificates" ? 'h-72' : 'h-48'} w-full bg-neutral-950 relative overflow-hidden group`}>
-                  
-                  {/* Efek Garis Kaca Mengkilap Lewat (Shimmer Animation) */}
-                  {activeTab === "Certificates" && (
-                    <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
-                      <motion.div
-                        animate={{ x: ['-100%', '200%'] }}
-                        transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", repeatDelay: 2 }}
-                        className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12"
-                      />
-                    </div>
-                  )}
-
+                <div className={`${activeTab === "Certificates" ? 'h-64' : 'h-44'} w-full bg-neutral-950 relative overflow-hidden group`}>
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition duration-300 z-10" />
-                  
                   <img 
                     src={item.image} 
                     alt={item.title} 
                     className={`w-full h-full ${activeTab === "Certificates" ? 'object-cover bg-neutral-950' : 'object-cover object-top'} group-hover:scale-105 transition duration-500`}
                   />
-                  
                   {position === 0 && (
                     <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-xs">
                       <span className="px-4 py-2 rounded-full bg-white text-black text-xs font-mono font-semibold flex items-center gap-1.5 shadow-lg">
@@ -201,27 +170,20 @@ export default function Projects() {
                       </span>
                     </div>
                   )}
-
-                  {activeTab === "Projects" && (
-                    <span className="absolute top-3 right-3 z-20 text-[10px] font-mono px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-white border border-white/25">
-                      {item.category}
-                    </span>
-                  )}
                 </div>
 
-                {/* Konten Kartu (Hanya Tampil untuk Proyek) */}
                 {activeTab === "Projects" && (
-                  <div className="p-6 text-center">
+                  <div className="p-5 text-center">
                     <span className="text-xs font-mono text-neutral-400 block mb-1">
                       {item.client}
                     </span>
                     <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
                       {item.title}
                     </h3>
-                    <p className="text-neutral-300 text-xs font-light leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-neutral-300 text-xs font-light leading-relaxed mb-3 line-clamp-2">
                       {item.description}
                     </p>
-                    <div className="flex flex-wrap justify-center gap-1.5 pt-4 border-t border-neutral-800/80">
+                    <div className="flex flex-wrap justify-center gap-1.5 pt-3 border-t border-neutral-800/80">
                       {item.tags.map((tag, tIdx) => (
                         <span key={tIdx} className="text-[10px] font-mono px-2.5 py-1 rounded-lg bg-neutral-950 text-neutral-300 border border-neutral-800">
                           {tag}
@@ -236,7 +198,6 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Memanggil Komponen Modal Terpisah */}
       <ProjectModal 
         isOpen={!!selectedItem}
         item={selectedItem}

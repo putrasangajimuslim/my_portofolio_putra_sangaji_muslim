@@ -55,25 +55,23 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-6 max-w-5xl mx-auto relative z-20 overflow-hidden">
+    <section id="experience" className="py-6 md:py-8 px-6 max-w-5xl mx-auto relative z-20 overflow-hidden">
       
-      {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-16 text-center"
+        className="mb-6 md:mb-8 text-center"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-3 shadow-inner">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-2 shadow-inner">
           <Briefcase size={15} className="text-white" /> Alur Perjalanan Karir Profesional
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-6">
+        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
           Jejak Langkah Karir
         </h2>
 
-        {/* Kotak Statistik Ringkasan Pengalaman & Proyek */}
-        <div className="flex flex-wrap justify-center gap-6 max-w-2xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
           <div className="px-5 py-3 rounded-2xl bg-neutral-900/80 border border-neutral-800 flex items-center gap-3 shadow-xl">
             <div className="p-2 rounded-xl bg-white/10 text-white">
               <Calendar size={18} />
@@ -96,15 +94,12 @@ export default function Experience() {
         </div>
       </motion.div>
 
-      {/* Timeline Vertikal Terpusat */}
       <div className="relative">
-        
-        {/* Garis Vertikal Utama di Tengah */}
         <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-neutral-800 -translate-x-1/2 hidden md:block" />
         
-        <div className="space-y-12 relative">
+        <div className="space-y-6 md:space-y-8 relative">
           {experiences.map((exp, index) => {
-            const isEven = index % 2 === 0; // Genap di kiri, Ganjil di kanan (atau sebaliknya)
+            const isEven = index % 2 === 0;
             
             return (
               <motion.div
@@ -117,8 +112,6 @@ export default function Experience() {
                   isEven ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                
-                {/* Konten Kartu */}
                 <div className="w-full md:w-5/12">
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
@@ -152,7 +145,6 @@ export default function Experience() {
                   </motion.div>
                 </div>
 
-                {/* Titik Node Angka di Tengah */}
                 <div className="hidden md:flex w-2/12 justify-center relative z-10 my-auto">
                   <motion.div
                     animate={{ scale: [1, 1.12, 1] }}
@@ -163,7 +155,6 @@ export default function Experience() {
                   </motion.div>
                 </div>
 
-                {/* Ruang Kosong Sisi Sebelah (Agar Seimbang di Desktop) */}
                 <div className="hidden md:block w-5/12" />
 
               </motion.div>

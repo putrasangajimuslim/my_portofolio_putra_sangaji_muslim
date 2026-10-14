@@ -4,11 +4,10 @@ import { Mail, Download, Send, ArrowUpRight } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 px-6 max-w-7xl mx-auto relative z-20">
+    <section id="contact" className="py-6 md:py-8 px-6 max-w-7xl mx-auto relative z-20">
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
-        {/* Kolom Kiri: Judul Besar & Deskripsi */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -16,17 +15,17 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="lg:col-span-7"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-6 shadow-inner">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-3 shadow-inner">
             MARI BERKOLABORASI
           </div>
           
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-none">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4 leading-none">
             MARI KITA <br />
             BEKERJA <br />
             SAMA
           </h2>
 
-          <p className="text-neutral-400 text-sm md:text-base font-light max-w-md mb-8 leading-relaxed">
+          <p className="text-neutral-400 text-sm md:text-base font-light max-w-md mb-6 leading-relaxed">
             Mencari tantangan baru untuk diselesaikan. Saya terbuka untuk peluang di mana saya dapat berkontribusi dalam pengembangan web, integrasi sistem, pengujian perangkat lunak, dan alur kerja digital.
           </p>
 
@@ -42,18 +41,16 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Kolom Kanan: Kartu Kontak & Tautan Sosial */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-5 flex flex-col gap-4"
+          className="lg:col-span-5 flex flex-col gap-3"
         >
-          {/* Kartu Email */}
           <a
             href="mailto:putrasangajimuslim3@gmail.com"
-            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-5 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
+            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-white">
@@ -69,12 +66,11 @@ export default function Contact() {
             <span className="text-xs font-mono text-neutral-500">01</span>
           </a>
 
-          {/* Kartu WhatsApp */}
           <a
             href="https://wa.me/6282117633116"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-5 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
+            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-white">
@@ -93,12 +89,11 @@ export default function Contact() {
             </div>
           </a>
 
-          {/* Kartu GitHub */}
           <a
             href="https://github.com/putrasangajimuslim"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-5 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
+            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-white">
@@ -117,12 +112,11 @@ export default function Contact() {
             </div>
           </a>
 
-          {/* Kartu LinkedIn */}
           <a
             href="https://www.linkedin.com/in/putra-sangaji-muslim?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-5 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
+            className="group bg-neutral-900/70 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between hover:border-neutral-600 transition-all duration-300 shadow-xl"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-white">
@@ -141,10 +135,9 @@ export default function Contact() {
             </div>
           </a>
 
-          {/* Tombol Kirim Pesan */}
           <a
             href="mailto:putrasangajimuslim3@gmail.com"
-            className="mt-2 w-full py-4 rounded-2xl bg-neutral-900/90 border border-neutral-800 hover:bg-neutral-800 hover:border-neutral-600 text-white font-mono text-xs font-semibold tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-2xl cursor-pointer"
+            className="mt-1 w-full py-3.5 rounded-2xl bg-neutral-900/90 border border-neutral-800 hover:bg-neutral-800 hover:border-neutral-600 text-white font-mono text-xs font-semibold tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-2xl cursor-pointer"
           >
              KIRIM PESAN <Send size={14} />
           </a>

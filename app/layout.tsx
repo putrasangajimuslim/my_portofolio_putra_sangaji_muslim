@@ -1,29 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import Navbar from '@/app/components/Navbar';
+import Container from '@/app/components/Container';
+import React from 'react';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "My Portofolio Putra Sangaji Muslim",
-  description: "Portofolio profesional Putra Sangaji Muslim - Front End Developer",
+export const metadata = {
+  title: 'My Portofolio Putra Sangaji Muslim',
+  description: 'Portofolio interaktif Putra Sangaji Muslim',
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="id" className="scroll-smooth">
+      <body className="bg-[#0a0a0a] text-white antialiased selection:bg-white selection:text-black overflow-x-hidden">
+        <Navbar />
+        
+        {/* Main Wrapper untuk Lebar Responsif */}
+        <main className="min-h-screen">
+          <Container>
+            {children}
+          </Container>
+        </main>
+      </body>
     </html>
   );
 }
