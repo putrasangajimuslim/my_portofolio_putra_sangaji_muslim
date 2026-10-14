@@ -69,14 +69,15 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-6 md:py-8 px-6 max-w-7xl mx-auto relative z-20">
+    // Padding vertikal diperkecil menjadi py-4 agar merapat dengan section di bawahnya
+    <section id="projects" className="py-4 px-6 max-w-7xl mx-auto relative z-20">
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-6 text-center"
+        className="mb-4 text-center"
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-xs font-mono text-neutral-400 mb-2 shadow-inner">
           <FolderGit2 size={15} className="text-white" /> Etalase Portofolio
@@ -84,7 +85,7 @@ export default function Projects() {
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2">
           Portofolio & Sertifikasi
         </h2>
-        <p className="text-neutral-400 text-xs md:text-sm max-w-xl mx-auto font-light mb-6">
+        <p className="text-neutral-400 text-xs md:text-sm max-w-xl mx-auto font-light mb-4">
           Jelajahi perjalanan karir saya melalui proyek unggulan dan sertifikasi resmi.
         </p>
 

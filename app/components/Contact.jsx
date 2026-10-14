@@ -4,7 +4,8 @@ import { Mail, Download, Send, ArrowUpRight } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-6 md:py-8 px-6 max-w-7xl mx-auto relative z-20">
+    // Padding vertikal diperkecil menjadi py-4 agar merapat dengan section di atasnya
+    <section id="contact" className="py-4 px-6 max-w-7xl mx-auto relative z-20">
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         

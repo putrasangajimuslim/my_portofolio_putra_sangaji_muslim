@@ -1,17 +1,25 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw } from 'lucide-react';
 
 export default function IntroOverlay() {
   const [countdown, setCountdown] = useState(5);
   const [isCountingDown, setIsCountingDown] = useState(true);
-  const [hasScrolledAway, setHasScrolledAway] = useState(false);
-  const [isAtTop, setIsAtTop] = useState(false);
+  const [showFarewell, setShowFarewell] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  
+  const lastScrollY = useRef(0);
+  const hasScrolledDown = useRef(false);
 
   // Hitung mundur awal
   useEffect(() => {
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
+    if (hasSeenIntro) {
+      setIsCountingDown(false);
+      return;
+    }
+
     document.body.style.overflow = 'hidden';
     if (countdown > 1) {
       const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
@@ -19,41 +27,51 @@ export default function IntroOverlay() {
     } else {
       const timer = setTimeout(() => {
         setIsCountingDown(false);
+        sessionStorage.setItem('hasSeenIntro', 'true');
         document.body.style.overflow = 'auto';
       }, 1000);
       return () => clearTimeout(timer);
     }
   }, [countdown]);
 
-  // Deteksi ketika user sudah scroll ke bawah lalu kembali ke paling atas (Farewell)
+  // Deteksi arah scroll secara akurat
   useEffect(() => {
     if (isCountingDown) return;
 
-    const handleWindowScroll = () => {
-      if (window.scrollY > 50) {
-        setHasScrolledAway(true);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Jika user scroll ke bawah sejauh lebih dari 100px, tandai bahwa user sudah menjelajahi halaman
+      if (currentScrollY > 100) {
+        hasScrolledDown.current = true;
       }
-      if (hasScrolledAway && window.scrollY < 10) {
-        setIsAtTop(true);
+
+      // Layar selamat tinggal HANYA muncul jika:
+      // 1. User sudah pernah scroll ke bawah sebelumnya
+      // 2. Posisi scroll sekarang berada di paling atas (0)
+      // 3. Arah scroll sebelumnya bergerak ke atas (menuju 0)
+      if (hasScrolledDown.current && currentScrollY <= 0 && lastScrollY.current > 0) {
+        setShowFarewell(true);
         document.body.style.overflow = 'hidden';
       }
+
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleWindowScroll);
-    return () => window.removeEventListener('scroll', handleWindowScroll);
-  }, [isCountingDown, hasScrolledAway]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isCountingDown]);
 
   const handleRefresh = () => {
+    sessionStorage.removeItem('hasSeenIntro');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setHasScrolledAway(false);
-    setIsAtTop(false);
+    hasScrolledDown.current = false;
+    setShowFarewell(false);
     setCountdown(5);
     setIsCountingDown(true);
     setRefreshKey((prev) => prev + 1);
     document.body.style.overflow = 'hidden';
   };
-
-  const showFarewell = hasScrolledAway && isAtTop;
 
   if (!isCountingDown && !showFarewell) return null;
 
