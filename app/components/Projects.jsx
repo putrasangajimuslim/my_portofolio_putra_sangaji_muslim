@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FolderGit2, Award, ShieldCheck, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
+import { FolderGit2, Award, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import ProjectModal from './ProjectModal';
 
 const projectsData = [
@@ -27,21 +27,21 @@ const projectsData = [
   },
   {
     title: "Wedding Platform Authentication",
-    client: "Web Application Project",
+    client: "Proyek Aplikasi Web",
     description: "Platform manajemen undangan pernikahan digital lengkap dengan sistem autentikasi pengguna yang aman.",
     details: "Sistem platform undangan pernikahan digital yang dilengkapi halaman autentikasi (login/register) untuk manajemen tamu, buku tamu digital, dan pengaturan acara pernikahan.",
     tags: ["React.js", "Next.js", "Tailwind CSS", "Authentication"],
-    category: "Web Application",
+    category: "Aplikasi Web",
     image: "/project/porto3.png",
     link: "https://wedding-io-five.vercel.app/auth"
   },
   {
     title: "Digital Invitation Platform",
-    client: "Digital Invitation Project",
+    client: "Proyek Undangan Digital",
     description: "Aplikasi web undangan digital interaktif dengan desain elegan untuk berbagai acara spesial.",
     details: "Platform undangan digital modern yang menyajikan informasi acara secara informatif, RSVP online, galeri foto, serta peta lokasi interaktif bagi para tamu undangan.",
     tags: ["React.js", "Tailwind CSS", "Vercel", "UI/UX"],
-    category: "Web Application",
+    category: "Platform Digital",
     image: "/project/porto4.png",
     link: "https://digital-invitation-beta-1.vercel.app/"
   }
