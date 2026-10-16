@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background Kotak Gelap dengan Sudut Melengkung -->
+  <rect width="64" height="64" rx="16" fill="#0a0a0a" />
+  
+  {/* Garis Aksen Hijau Ala Terminal/Developer */}
+  <path d="M 12 50 L 52 50" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+  
+  {/* Teks Huruf PSM */}
+  <text 
+    x="50%" 
+    y="38" 
+    dominant-baseline="middle" 
+    text-anchor="middle" 
+    fill="#ffffff" 
+    font-family="monospace" 
+    font-size="22" 
+    font-weight="bold" 
+    letter-spacing="1px"
+  >
+    PSM
+  </text>
+</svg>
