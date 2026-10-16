@@ -168,7 +168,7 @@ export default function Hero() {
                   <ArrowUpRight size={13} className="text-neutral-500 group-hover:text-white transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                {/* WhatsApp (Disamakan dengan section Kontak) */}
+                {/* WhatsApp */}
                 <a
                   href="https://wa.me/6282117633116" 
                   target="_blank" 
