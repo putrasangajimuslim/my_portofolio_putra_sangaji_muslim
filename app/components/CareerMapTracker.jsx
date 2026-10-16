@@ -92,7 +92,6 @@ export default function CareerMapTracker() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(0.9);
 
-  // Auto GPS Tracking Simulation
   useEffect(() => {
     let interval;
     if (isPlaying) {
@@ -106,7 +105,7 @@ export default function CareerMapTracker() {
   const activeRoute = careerRoutes[activeIndex];
 
   return (
-    <section id="career-map" className="py-10 px-4 sm:px-6 max-w-7xl mx-auto relative z-20">
+    <section id="career-map" className="py-10 px-4 sm:px-6 w-full max-w-7xl mx-auto relative z-20 overflow-x-hidden">
       
       {/* Header Section */}
       <motion.div
@@ -122,15 +121,15 @@ export default function CareerMapTracker() {
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2">
           Jejak Langkah Karir
         </h2>
-        <p className="text-neutral-400 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
+        <p className="text-neutral-400 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed px-2">
           Simulasi rute peta navigasi interaktif dari awal karir (Point 1) hingga posisi saat ini (Point 6).
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
         
-        {/* Kolom Kiri: Peta Interaktif Bergaya Google Maps */}
-        <div className="lg:col-span-7 bg-[#0b0b0b] border border-neutral-800 rounded-3xl p-4 sm:p-6 shadow-2xl relative flex flex-col">
+        {/* Kolom Kiri: Peta Interaktif */}
+        <div className="lg:col-span-7 bg-[#0b0b0b] border border-neutral-800 rounded-3xl p-4 sm:p-6 shadow-2xl relative flex flex-col w-full overflow-hidden">
           
           {/* Status Bar GPS */}
           <div className="flex items-center justify-between bg-neutral-900/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-neutral-800 mb-4 z-10 text-xs font-mono">
@@ -144,18 +143,16 @@ export default function CareerMapTracker() {
             {/* <span className="text-neutral-400 text-[10px]">GPS: Aktif</span> */}
           </div>
 
-          {/* Area Peta dengan Kustom Scrollbar Gelap */}
+          {/* Area Peta */}
           <div className="relative w-full overflow-x-auto pb-3 rounded-2xl bg-neutral-950 border border-neutral-900 shadow-inner [scrollbar-width:thin] [scrollbar-color:#262626_#0a0a0a] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[#0a0a0a] [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full">
             <div className="min-w-[620px] h-[340px] sm:h-[380px] relative flex items-center justify-center">
               
-              {/* Grid Background */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)] bg-[size:3rem_3.5rem] opacity-40 pointer-events-none" />
 
               <div 
                 className="absolute inset-0 transition-transform duration-500 ease-out flex items-center justify-center"
                 style={{ transform: `scale(${zoomLevel})` }}
               >
-                {/* Jalur Rute Garis SVG */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <path
                     d="M 12 48 Q 20 68, 29 68 T 46 38 T 63 65 T 80 42 T 91 58"
@@ -172,7 +169,6 @@ export default function CareerMapTracker() {
                   />
                 </svg>
 
-                {/* Titik Pin Checkpoint */}
                 {careerRoutes.map((route, idx) => {
                   const isActive = activeIndex === idx;
                   return (
@@ -211,7 +207,7 @@ export default function CareerMapTracker() {
             </div>
           </div>
 
-          {/* Kontrol Peta Bawah (Zoom & Play) */}
+          {/* Kontrol Peta Bawah */}
           <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
@@ -252,8 +248,8 @@ export default function CareerMapTracker() {
           </span>
         </div>
 
-        {/* Kolom Kanan: Detail Checkpoint Karir & Total Pengalaman */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
+        {/* Kolom Kanan: Detail Checkpoint Karir */}
+        <div className="lg:col-span-5 flex flex-col gap-4 w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeRoute.id}
@@ -261,7 +257,7 @@ export default function CareerMapTracker() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4 }}
-              className="bg-neutral-900/90 backdrop-blur-xl border border-neutral-800 p-6 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col justify-between"
+              className="bg-neutral-900/90 backdrop-blur-xl border border-neutral-800 p-6 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col justify-between w-full"
             >
               <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -334,8 +330,8 @@ export default function CareerMapTracker() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Kartu Informasi Total Pengalaman Kerja di Bawah Detail */}
-          <div className="bg-neutral-900/80 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between shadow-xl">
+          {/* Kartu Informasi Total Pengalaman Kerja */}
+          <div className="bg-neutral-900/80 backdrop-blur-xl border border-neutral-800 p-4 rounded-2xl flex items-center justify-between shadow-xl w-full">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                 <Award size={20} />

@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { LogOut } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ onLogout }) {
   const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Navbar() {
         opacity: showNavbar ? 1 : 0 
       }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none"
     >
       <div className="pointer-events-auto w-full max-w-xl backdrop-blur-2xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden">
         
@@ -52,7 +53,7 @@ export default function Navbar() {
           </a>
         </motion.div>
 
-        {/* Menu Navigasi: Efek transparan kaca hanya muncul saat di-hover */}
+        {/* Menu Navigasi */}
         <motion.div 
           initial={{ y: -15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -63,7 +64,7 @@ export default function Navbar() {
             onClick={(e) => scrollToSection(e, 'about')} 
             className="px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 hover:text-white transition-all duration-300 cursor-pointer border-none shadow-sm"
           >
-            Tentang Saya
+            Tentang
           </button>
           <button 
             onClick={(e) => scrollToSection(e, 'education')} 
@@ -85,16 +86,19 @@ export default function Navbar() {
           </button>
         </motion.div>
 
+        {/* Tombol Keluar */}
         <motion.div
           initial={{ x: 30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center gap-2"
         >
           <button 
-            onClick={(e) => scrollToSection(e, 'contact')}
-            className="text-[11px] font-semibold uppercase tracking-widest px-3.5 py-1.5 rounded-xl bg-white/15 text-white hover:bg-white/25 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner cursor-pointer"
+            onClick={onLogout}
+            className="text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all duration-300 backdrop-blur-md border border-red-500/30 shadow-inner cursor-pointer flex items-center gap-1.5"
+            title="Keluar"
           >
-            Hubungi
+            <LogOut size={13} /> Keluar
           </button>
         </motion.div>
 

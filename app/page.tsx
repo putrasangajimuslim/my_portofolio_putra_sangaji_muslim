@@ -1,33 +1,60 @@
 'use client';
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import Skills from "./components/Skills"
-import Contact from "./components/Contact"
-import Educations from "./components/Educations"
-import Experience from "./components/Experience"
-import Projects from "./components/Projects"
-import IntroOverlay from "./components/IntroOverlay"
-import CareerMapTracker from "./components/CareerMapTracker"
+import { useState, useEffect } from 'react';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Educations from "./components/Educations";
+import Experience from "./components/Experience";
+import CareerMapTracker from "./components/CareerMapTracker";
 import GitHubStatsCard from "./components/GitHubStatsCard";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import IntroOverlay from "./components/IntroOverlay";
+import OptimizationHub from "./components/OptimizationHub.jsx";
 
 export default function Home() {
+  const [showFarewell, setShowFarewell] = useState(false);
+  const [isEntered, setIsEntered] = useState(false);
+
+  // Mengunci scroll di sisi samping ketika layar Intro atau Farewell aktif
+  useEffect(() => {
+    if (!isEntered || showFarewell) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isEntered, showFarewell]);
+
+  const handleEnter = () => {
+    setIsEntered(true);
+    document.body.style.overflow = 'auto';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white overflow-hidden flex flex-col gap-2 md:gap-4 pb-6 relative">
-      {/* Overlay Intro terpisah di depan */}
-      <IntroOverlay />
+      {/* Intro Overlay / Selamat Datang / Selamat Tinggal */}
+      {(!isEntered || showFarewell) && (
+        <IntroOverlay 
+          showFarewell={showFarewell} 
+          setShowFarewell={setShowFarewell} 
+          onEnter={handleEnter} 
+        />
+      )}
+
+      {/* Navbar dengan tombol Keluar */}
+      <Navbar onLogout={() => setShowFarewell(true)} />
 
       {/* Konten Portofolio */}
-      <Navbar />
       <Hero />
       <Educations />
       {/* <Experience /> */}
-
-      {/* Komponen Peta Jejak Langkah Karir GPS */}
       <CareerMapTracker />
-
-      {/* Komponen Statistik GitHub */}
       <GitHubStatsCard />
-
+      <OptimizationHub />
       <Projects />
       <Skills />
       <Contact />

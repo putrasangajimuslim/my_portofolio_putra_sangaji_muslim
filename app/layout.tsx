@@ -1,6 +1,4 @@
 import './globals.css';
-import Navbar from '@/app/components/Navbar';
-import Container from '@/app/components/Container';
 import React from 'react';
 
 export const metadata = {
@@ -14,15 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="scroll-smooth">
-      <body className="bg-[#0a0a0a] text-white antialiased selection:bg-white selection:text-black overflow-x-hidden">
-        <Navbar />
-        
-        {/* Main Wrapper untuk Lebar Responsif */}
-        <main className="min-h-screen">
-          <Container>
-            {children}
-          </Container>
+    <html lang="id" className="scroll-smooth bg-[#0a0a0a]">
+      <body className="bg-[#0a0a0a] text-white antialiased selection:bg-white selection:text-black overflow-x-hidden m-0 p-0">
+        <main className="min-h-screen bg-[#0a0a0a] w-full m-0 p-0">
+          {children}
         </main>
       </body>
     </html>
