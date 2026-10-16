@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Educations from "./components/Educations";
-import Experience from "./components/Experience";
 import CareerMapTracker from "./components/CareerMapTracker";
 import GitHubStatsCard from "./components/GitHubStatsCard";
+import OptimizationHub from "./components/OptimizationHub.jsx";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import IntroOverlay from "./components/IntroOverlay";
-import OptimizationHub from "./components/OptimizationHub.jsx";
 
 export default function Home() {
   const [showFarewell, setShowFarewell] = useState(false);
@@ -51,13 +50,23 @@ export default function Home() {
       {/* Konten Portofolio */}
       <Hero />
       <Educations />
-      {/* <Experience /> */}
-      <CareerMapTracker />
+      
+      <div id="career-map">
+        <CareerMapTracker />
+      </div>
+      
+      <div id="knowledge">
+        <OptimizationHub />
+      </div>
+
       <GitHubStatsCard />
-      <OptimizationHub />
       <Projects />
       <Skills />
-      <Contact />
+      
+      {/* Tambahkan id="contact" agar navbar mendeteksi active pada bagian kontak */}
+      <div id="contact">
+        <Contact />
+      </div>
     </main>
   );
 }

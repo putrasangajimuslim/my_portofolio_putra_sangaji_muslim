@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Navigation, Play, Pause, RotateCcw, 
@@ -80,7 +80,7 @@ const careerRoutes = [
     period: "Juni 2026 – Oktober 2026",
     duration: "5 Bulan",
     location: "Jakarta, Indonesia",
-    status: "Posisi Saat Ini",
+    status: "Posisi Saat Ini (Live GPS)",
     description: "Menerjemahkan spesifikasi frontend, arsitektur UI, manajemen state, dan integrasi API untuk Internal Corporate & Auction Web.",
     skills: ["React/Next.js", "Tailwind CSS", "REST API", "SonarQube", "Postman"],
     coordinates: { x: 91, y: 58 }
@@ -91,7 +91,11 @@ export default function CareerMapTracker() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(0.9);
+  
+  // Ref untuk mengontrol posisi scroll horizontal peta secara otomatis
+  const mapScrollRef = useRef(null);
 
+  // Efek Auto-Play GPS
   useEffect(() => {
     let interval;
     if (isPlaying) {
@@ -101,6 +105,33 @@ export default function CareerMapTracker() {
     }
     return () => clearInterval(interval);
   }, [isPlaying]);
+
+  // Efek Auto-Scroll Peta ke Samping Berdasarkan Checkpoint Aktif
+  useEffect(() => {
+    if (mapScrollRef.current) {
+      const container = mapScrollRef.current;
+      const innerWidth = 620; // Lebar total min-w kontainer peta
+      const containerWidth = container.clientWidth;
+      
+      let scrollVal = 0;
+      if (activeIndex === 0) {
+        // Posisi 1: Scroll kembali ke ujung kiri paling awal
+        scrollVal = 0;
+      } else if (activeIndex === careerRoutes.length - 1) {
+        // Posisi 6: Scroll ke ujung kanan maksimal agar titik terakhir terlihat jelas
+        scrollVal = innerWidth - containerWidth;
+      } else {
+        // Posisi tengah (Point 2 sampai 5): Posisikan agar titik aktif berada di tengah pandangan
+        const targetX = (careerRoutes[activeIndex].coordinates.x / 100) * innerWidth;
+        scrollVal = targetX - containerWidth / 2;
+      }
+
+      container.scrollTo({
+        left: Math.max(0, scrollVal),
+        behavior: 'smooth'
+      });
+    }
+  }, [activeIndex]);
 
   const activeRoute = careerRoutes[activeIndex];
 
@@ -115,9 +146,9 @@ export default function CareerMapTracker() {
         transition={{ duration: 0.6 }}
         className="mb-8 text-center"
       >
-        {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs font-mono text-emerald-400 mb-3 shadow-inner">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs font-mono text-emerald-400 mb-3 shadow-inner">
           <Navigation size={14} className="animate-pulse text-emerald-400" /> Google Maps Style Career Tracker
-        </div> */}
+        </div>
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2">
           Jejak Langkah Karir
         </h2>
@@ -140,11 +171,14 @@ export default function CareerMapTracker() {
               </span>
               <span className="text-neutral-300">Rute: <strong className="text-white">Checkpoint {activeRoute.step}</strong></span>
             </div>
-            {/* <span className="text-neutral-400 text-[10px]">GPS: Aktif</span> */}
+            <span className="text-neutral-400 text-[10px]">GPS: Aktif</span>
           </div>
 
-          {/* Area Peta */}
-          <div className="relative w-full overflow-x-auto pb-3 rounded-2xl bg-neutral-950 border border-neutral-900 shadow-inner [scrollbar-width:thin] [scrollbar-color:#262626_#0a0a0a] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[#0a0a0a] [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full">
+          {/* Area Peta dengan ref untuk Auto-Scroll */}
+          <div 
+            ref={mapScrollRef}
+            className="relative w-full overflow-x-auto pb-3 rounded-2xl bg-neutral-950 border border-neutral-900 shadow-inner [scrollbar-width:thin] [scrollbar-color:#262626_#0a0a0a] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[#0a0a0a] [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full"
+          >
             <div className="min-w-[620px] h-[340px] sm:h-[380px] relative flex items-center justify-center">
               
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)] bg-[size:3rem_3.5rem] opacity-40 pointer-events-none" />
@@ -244,7 +278,7 @@ export default function CareerMapTracker() {
             </div>
           </div>
           <span className="text-[10px] font-mono text-neutral-500 text-center mt-2">
-            💡 Geser peta ke kiri/kanan di layar kecil untuk melihat keseluruhan rute.
+            💡 Peta akan bergeser otomatis mengikuti checkpoint saat mode Putar Auto-GPS aktif.
           </span>
         </div>
 
