@@ -36,7 +36,7 @@ export default function Navbar() {
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
     >
-      <div className="pointer-events-auto w-full max-w-xl backdrop-blur-2xl bg-white/15 border border-white/25 shadow-2xl rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden">
+      <div className="pointer-events-auto w-full max-w-xl backdrop-blur-2xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden">
         
         <motion.div
           initial={{ x: -30, opacity: 0 }}
@@ -46,22 +46,43 @@ export default function Navbar() {
           <a 
             href="#" 
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="font-bold text-sm tracking-wider text-white cursor-pointer"
+            className="font-bold text-sm tracking-wider text-white cursor-pointer px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 transition-all duration-300"
           >
             PSM<span className="text-neutral-400">.</span>
           </a>
         </motion.div>
 
+        {/* Menu Navigasi: Efek transparan kaca hanya muncul saat di-hover */}
         <motion.div 
           initial={{ y: -15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden sm:flex items-center space-x-6 text-xs font-medium text-neutral-200"
+          className="hidden sm:flex items-center space-x-1 text-xs font-medium text-neutral-200"
         >
-          <button onClick={(e) => scrollToSection(e, 'about')} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none">Tentang Saya</button>
-          <button onClick={(e) => scrollToSection(e, 'education')} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none">Pendidikan</button>
-          <button onClick={(e) => scrollToSection(e, 'projects')} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none">Proyek</button>
-          <button onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none">Kontak</button>
+          <button 
+            onClick={(e) => scrollToSection(e, 'about')} 
+            className="px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 hover:text-white transition-all duration-300 cursor-pointer border-none shadow-sm"
+          >
+            Tentang Saya
+          </button>
+          <button 
+            onClick={(e) => scrollToSection(e, 'education')} 
+            className="px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 hover:text-white transition-all duration-300 cursor-pointer border-none shadow-sm"
+          >
+            Pendidikan
+          </button>
+          <button 
+            onClick={(e) => scrollToSection(e, 'projects')} 
+            className="px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 hover:text-white transition-all duration-300 cursor-pointer border-none shadow-sm"
+          >
+            Proyek
+          </button>
+          <button 
+            onClick={(e) => scrollToSection(e, 'contact')} 
+            className="px-3 py-1.5 rounded-xl bg-transparent hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20 hover:text-white transition-all duration-300 cursor-pointer border-none shadow-sm"
+          >
+            Kontak
+          </button>
         </motion.div>
 
         <motion.div
@@ -71,7 +92,7 @@ export default function Navbar() {
         >
           <button 
             onClick={(e) => scrollToSection(e, 'contact')}
-            className="text-[11px] font-semibold uppercase tracking-widest px-3.5 py-1.5 rounded-xl bg-white/20 text-white hover:bg-white/30 transition backdrop-blur-md border border-white/20 shadow-inner cursor-pointer"
+            className="text-[11px] font-semibold uppercase tracking-widest px-3.5 py-1.5 rounded-xl bg-white/15 text-white hover:bg-white/25 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner cursor-pointer"
           >
             Hubungi
           </button>

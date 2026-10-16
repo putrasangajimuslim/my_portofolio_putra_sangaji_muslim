@@ -7,6 +7,8 @@ import Educations from "./components/Educations"
 import Experience from "./components/Experience"
 import Projects from "./components/Projects"
 import IntroOverlay from "./components/IntroOverlay"
+import CareerMapTracker from "./components/CareerMapTracker"
+import GitHubStatsCard from "./components/GitHubStatsCard";
 
 export default function Home() {
   return (
@@ -18,7 +20,14 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Educations />
-      <Experience />
+      {/* <Experience /> */}
+
+      {/* Komponen Peta Jejak Langkah Karir GPS */}
+      <CareerMapTracker />
+
+      {/* Komponen Statistik GitHub */}
+      <GitHubStatsCard />
+
       <Projects />
       <Skills />
       <Contact />

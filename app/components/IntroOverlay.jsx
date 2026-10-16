@@ -12,7 +12,7 @@ export default function IntroOverlay() {
   const lastScrollY = useRef(0);
   const hasScrolledDown = useRef(false);
 
-  // Hitung mundur awal
+  // 1. Hitungan mundur awal (berjalan stabil tanpa terganggu event scroll)
   useEffect(() => {
     const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
     if (hasSeenIntro) {
@@ -21,35 +21,37 @@ export default function IntroOverlay() {
     }
 
     document.body.style.overflow = 'hidden';
-    if (countdown > 1) {
-      const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    } else {
-      const timer = setTimeout(() => {
-        setIsCountingDown(false);
-        sessionStorage.setItem('hasSeenIntro', 'true');
-        document.body.style.overflow = 'auto';
+    
+    if (countdown > 0) {
+      const timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setTimeout(() => {
+              setIsCountingDown(false);
+              sessionStorage.setItem('hasSeenIntro', 'true');
+              document.body.style.overflow = 'auto';
+            }, 400);
+            return 0;
+          }
+          return prev - 1;
+        });
       }, 1000);
-      return () => clearTimeout(timer);
+      return () => clearInterval(timer);
     }
   }, [countdown]);
 
-  // Deteksi arah scroll secara akurat
+  // 2. Deteksi scroll HANYA aktif setelah hitungan mundur selesai (mencegah stuck di awal)
   useEffect(() => {
     if (isCountingDown) return;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Jika user scroll ke bawah sejauh lebih dari 100px, tandai bahwa user sudah menjelajahi halaman
       if (currentScrollY > 100) {
         hasScrolledDown.current = true;
       }
 
-      // Layar selamat tinggal HANYA muncul jika:
-      // 1. User sudah pernah scroll ke bawah sebelumnya
-      // 2. Posisi scroll sekarang berada di paling atas (0)
-      // 3. Arah scroll sebelumnya bergerak ke atas (menuju 0)
       if (hasScrolledDown.current && currentScrollY <= 0 && lastScrollY.current > 0) {
         setShowFarewell(true);
         document.body.style.overflow = 'hidden';
@@ -84,7 +86,7 @@ export default function IntroOverlay() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center w-full max-w-5xl mx-auto z-30 flex flex-col items-center justify-center"
+        className="text-center w-full max-w-4xl mx-auto z-30 flex flex-col items-center justify-center"
       >
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -95,25 +97,25 @@ export default function IntroOverlay() {
           {showFarewell ? "Sampai Jumpa Kembali" : "Portofolio Interaktif"}
         </motion.div>
 
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight text-white flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
           {isCountingDown ? (
             <>
-              <motion.span initial={{ x: -80, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="text-white">
+              <motion.span initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="text-white">
                 Selamat Datang di
               </motion.span>
-              <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-400 w-full md:w-auto text-center">
+              <motion.span initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-400 w-full md:w-auto text-center">
                 Portofolio Saya.
               </motion.span>
             </>
           ) : (
             <>
-              <motion.span initial={{ x: -80, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="text-white">
+              <motion.span initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="text-white">
                 Selamat
               </motion.span>
-              <motion.span initial={{ x: 80, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-500 font-light">
+              <motion.span initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-500 font-light">
                 Tinggal
               </motion.span>
-              <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-300 w-full md:w-auto text-center">
+              <motion.span initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="text-neutral-300 w-full md:w-auto text-center">
                 Terima Kasih.
               </motion.span>
             </>
@@ -123,15 +125,15 @@ export default function IntroOverlay() {
         {isCountingDown ? (
           <div className="mt-6 flex flex-col items-center gap-2">
             <p className="text-neutral-400 text-xs md:text-sm tracking-wider uppercase">Memuat dalam:</p>
-            <div className="relative w-20 h-20 rounded-full border border-white/25 bg-white/10 backdrop-blur-xl flex items-center justify-center shadow-2xl">
+            <div className="relative w-16 h-16 rounded-full border border-white/25 bg-white/10 backdrop-blur-xl flex items-center justify-center shadow-2xl">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={countdown}
                   initial={{ scale: 0.3, opacity: 0, filter: "blur(4px)" }}
                   animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
                   exit={{ scale: 1.8, opacity: 0, filter: "blur(4px)" }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-3xl font-bold text-white font-mono"
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-2xl font-bold text-white font-mono"
                 >
                   {countdown}
                 </motion.span>
@@ -143,10 +145,10 @@ export default function IntroOverlay() {
             <p className="text-neutral-400 text-xs md:text-sm tracking-wider uppercase">Tekan tombol di bawah untuk kembali ke awal</p>
             <button
               onClick={handleRefresh}
-              className="p-4 rounded-full bg-neutral-900 border border-neutral-700 text-white hover:bg-neutral-800 transition-all shadow-2xl flex items-center justify-center group cursor-pointer"
+              className="p-3.5 rounded-full bg-neutral-900 border border-neutral-700 text-white hover:bg-neutral-800 transition-all shadow-2xl flex items-center justify-center group cursor-pointer"
               title="Muat Ulang Portofolio"
             >
-              <RotateCcw size={22} className="group-hover:-rotate-90 transition-transform duration-300" />
+              <RotateCcw size={20} className="group-hover:-rotate-90 transition-transform duration-300" />
             </button>
           </motion.div>
         )}
