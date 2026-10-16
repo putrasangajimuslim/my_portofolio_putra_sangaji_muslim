@@ -14,7 +14,7 @@ const careerRoutes = [
     company: "The Big Rich Group",
     period: "Februari 2021 – November 2022",
     duration: "1 Tahun 10 Bulan",
-    location: "Jakarta Timur",
+    location: "Jakarta, Indonesia",
     status: "Titik Awal (Start Point)",
     description: "Mengembangkan RESTful API untuk proyek Aeon dan Matchapp serta integrasi third-party API.",
     skills: ["PHP", "Laravel", "Vue.js", "MySQL", "JavaScript", "Ionic"],
@@ -27,7 +27,7 @@ const careerRoutes = [
     company: "PT. Vads Indonesia",
     period: "Desember 2022 – November 2023",
     duration: "1 Tahun",
-    location: "Jakarta Barat",
+    location: "Jakarta, Indonesia",
     status: "Checkpoint #2",
     description: "Mengembangkan aplikasi web Recruitment Management dan Sales Tracking, serta perancangan database.",
     skills: ["PHP", "Laravel", "Yii", "MySQL", "JavaScript", "jQuery"],
@@ -40,7 +40,7 @@ const careerRoutes = [
     company: "PT. Mitra Integrasi Informatika (Site: BNI)",
     period: "Desember 2023 – Mei 2024",
     duration: "6 Bulan",
-    location: "Jakarta Selatan",
+    location: "Jakarta, Indonesia",
     status: "Checkpoint #3",
     description: "Mengembangkan dan memelihara aplikasi web backoffice serta RESTful API untuk kebutuhan operasional.",
     skills: ["Angular JS", "MySQL", "Git", "JSON", "XML"],
@@ -53,7 +53,7 @@ const careerRoutes = [
     company: "PT. Mitra Integrasi Informatika (Site: BNI)",
     period: "Juni 2024 – Juli 2025",
     duration: "1 Tahun 2 Bulan",
-    location: "Jakarta Pusat",
+    location: "Jakarta, Indonesia",
     status: "Checkpoint #4",
     description: "Melakukan tracing error menggunakan Elastic Kibana dan maintenance Redis pada aplikasi Wondr.",
     skills: ["Elastic Kibana", "Dynatrace", "SQL", "Redis", "OCP"],
@@ -66,7 +66,7 @@ const careerRoutes = [
     company: "PT. Mitra Integrasi Informatika (Site: BNI)",
     period: "Agustus 2025 – Feb 2026",
     duration: "7 Bulan",
-    location: "Jakarta Pusat",
+    location: "Jakarta, Indonesia",
     status: "Checkpoint #5",
     description: "Menganalisis integrasi sistem, validasi payload API, data mapping, dan transformation logic.",
     skills: ["REST API", "JSON", "XML", "Elastic Kibana", "Dynatrace"],
@@ -80,7 +80,7 @@ const careerRoutes = [
     period: "Juni 2026 – Oktober 2026",
     duration: "5 Bulan",
     location: "Jakarta, Indonesia",
-    status: "Posisi Saat Ini (Live GPS)",
+    status: "Posisi Saat Ini",
     description: "Menerjemahkan spesifikasi frontend, arsitektur UI, manajemen state, dan integrasi API untuk Internal Corporate & Auction Web.",
     skills: ["React/Next.js", "Tailwind CSS", "REST API", "SonarQube", "Postman"],
     coordinates: { x: 91, y: 58 }
@@ -146,9 +146,9 @@ export default function CareerMapTracker() {
         transition={{ duration: 0.6 }}
         className="mb-8 text-center"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs font-mono text-emerald-400 mb-3 shadow-inner">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs font-mono text-emerald-400 mb-3 shadow-inner">
           <Navigation size={14} className="animate-pulse text-emerald-400" /> Google Maps Style Career Tracker
-        </div>
+        </div> */}
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2">
           Jejak Langkah Karir
         </h2>
@@ -171,7 +171,7 @@ export default function CareerMapTracker() {
               </span>
               <span className="text-neutral-300">Rute: <strong className="text-white">Checkpoint {activeRoute.step}</strong></span>
             </div>
-            <span className="text-neutral-400 text-[10px]">GPS: Aktif</span>
+            {/* <span className="text-neutral-400 text-[10px]">GPS: Aktif</span> */}
           </div>
 
           {/* Area Peta dengan ref untuk Auto-Scroll */}
@@ -251,7 +251,7 @@ export default function CareerMapTracker() {
                   : 'bg-emerald-500 text-black hover:bg-emerald-400'
               }`}
             >
-              {isPlaying ? <><Pause size={13} /> Jeda Rute</> : <><Play size={13} /> Putar Auto-GPS</>}
+              {isPlaying ? <><Pause size={13} /> Jeda Rute</> : <><Play size={13} /> Putar Auto</>}
             </button>
 
             <div className="flex items-center gap-1.5 bg-neutral-900 p-1 rounded-xl border border-neutral-800">
